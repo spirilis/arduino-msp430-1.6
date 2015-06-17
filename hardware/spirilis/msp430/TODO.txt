@@ -1,0 +1,34 @@
+APIs to implement:
+	*digital I/O
+	*interrupts
+	*clocks - delay, sleep, sleepSeconds, suspend, wakeup
+		- Add FRAM support
+		- Add G2xxx/F2xxx support
+	*HardwareSerial
+	*SPI
+		- Add transfer9() support
+	I2C
+		- Test all slave modes with a partner
+		- Implement old-style USCI, eUSCI
+	analogRead
+	analogWrite (IRQ-driven double-buffered Timer_A updates, HW updates for B/D, use CCTL settings for hard-on/hard-off but not sure how to synchronize them)
+
+	Extended features:
+	SPI Slave
+	fast Digital I/O
+	USB
+	IR extensions in HardwareSerial
+	RTC - standard interface, periodic interrupt support, Software RTC code
+
+	Libraries:
+
+Chips to test:
+	*MSP430F5529
+	MSP430F5172
+	MSP430G2553
+	MSP430G2955
+	*MSP430F5659
+	*MSP430FR5969
+	MSP430FR4133
+	*MSP430FR6989
+	MSP430F5438A

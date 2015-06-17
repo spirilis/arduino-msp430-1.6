@@ -1,0 +1,33 @@
+/* Bitmask definitions for the various SMCLK-using peripherals on the MSP430
+ */
+
+#ifndef PERIPH_MASK_H
+#define PERIPH_MASK_H
+
+
+#define PERIPH_TIMERA0			0x00000001
+#define PERIPH_TIMERA1			0x00000002
+#define PERIPH_TIMERA2			0x00000004
+#define PERIPH_TIMERA3			0x00000008
+#define PERIPH_TIMERB0			0x00000010
+#define PERIPH_TIMERB1			0x00000020
+#define PERIPH_TIMERB2			0x00000040
+#define PERIPH_TIMERB3			0x00000080
+
+#define PERIPH_USI			0x00000100
+// USI and USCI never exist together, so we reuse USI's #
+#define PERIPH_USCI_A0			0x00000100
+#define PERIPH_USCI_A1			0x00000200
+#define PERIPH_USCI_A2			0x00000400
+#define PERIPH_USCI_A3			0x00000800
+
+#define PERIPH_USCI_B0			0x00001000
+#define PERIPH_USCI_B1			0x00002000
+#define PERIPH_USCI_B2			0x00004000
+#define PERIPH_USCI_B3			0x00008000
+
+// Rare peripherals
+#define PERIPH_TIMERD0			0x00010000
+#define PERIPH_TIMERD1			0x00020000
+
+#endif /* PERIPH_MASK_H */

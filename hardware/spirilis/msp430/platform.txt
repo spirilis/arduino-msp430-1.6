@@ -1,0 +1,41 @@
+name=TI MSP430 Energia-Arduino msp430-elf port
+version=1.0.0
+
+compiler.path=/opt/local/msp430-elf-gcc/bin/
+compiler.c.cmd=msp430-elf-gcc
+compiler.c.flags=-c -g -Os -ffunction-sections -fdata-sections -Wall -fno-exceptions
+compiler.cpp.cmd=msp430-elf-g++
+compiler.cpp.flags=-c -g -Os -ffunction-sections -fdata-sections -Wall -fno-exceptions -fno-rtti -fpermissive
+compiler.c.elf.cmd=msp430-elf-g++
+compiler.c.elf.flags=-Os -Wl,--gc-sections -Wl,-Map,/tmp/ldmap.txt
+compiler.ar.cmd=msp430-elf-ar
+compiler.ar.flags=rcs
+compiler.objcopy.cmd=msp430-elf-objcopy
+compiler.size.cmd=msp430-elf-size
+
+# Compile C files
+recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} -mmcu={build.mcu} -DF_CPU_DEFAULT={build.f_cpu} -m{build.optlarge} {build.extra_flags} -DARDUINO={runtime.ide.version} -DENERGIA={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} -DMSP430_MEMORY_{build.optlarge} {includes} "{source_file}" -o "{object_file}"
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} -mmcu={build.mcu} -o "{build.path}/{build.project_name}.elf" -u main {object_files} "{build.path}/{archive_file}" "-L{build.path}" -T "{build.ldscript}" -lm {build.optlibs}
+
+# Compile C++ files
+recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} -mmcu={build.mcu} -DF_CPU_DEFAULT={build.f_cpu} -m{build.optlarge} {build.extra_flags} -DARDUINO={runtime.ide.version} -DENERGIA={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} -DMSP430_MEMORY_{build.optlarge} {includes} "{source_file}" -o "{object_file}"
+
+# Compile ASM files
+recipe.S.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} -mmcu={build.mcu} -DF_CPU_DEFAULT={build.f_cpu} -m{build.optlarge} {build.extra_flags} -DARDUINO={runtime.ide.version} -DENERGIA={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} -DMSP430_MEMORY_{build.optlarge} {includes} "{source_file}" -o "{object_file}"
+
+# Create AR archive
+recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} "{build.path}/{archive_file}" "{object_file}"
+
+# Find ELF code size
+recipe.objcopy.nodebug.pattern="{compiler.path}{compiler.objcopy.cmd}" -g "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.nodebug.elf"
+recipe.size.pattern="{compiler.path}{compiler.size.cmd}" -A "{build.path}/{build.project_name}.nodebug.elf"
+recipe.size.regex=Total\s+([0-9]+).*
+
+# Tools definition
+
+tools.mspdebug.cmd.path=/usr/local/bin/mspdebug
+tools.mspdebug.upload.params.verbose=-v
+tools.mspdebug.upload.params.quiet=
+tools.mspdebug.upload.pattern="{cmd.path}" {upload.verbose} {upload.protocol} "prog {build.path}/{build.project_name}.elf"
+
+tools.mspdebug.bootloader.pattern="{cmd.path}" --allow-fw-update tilib "md 0x1000"

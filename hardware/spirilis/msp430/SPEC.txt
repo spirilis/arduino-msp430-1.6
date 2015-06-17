@@ -1,0 +1,30 @@
+variants:
+
+variant.h - All #define's, all extern definitions of pins_energia.h contents
+
+pins_energia.h - Database of Pin information
+
+Clock Pin Information-
+	BCS2: LFXT PORT, XIN/XOUT pins
+		BCS2_LFXT_PORT (=PxIN), BCS2_LFXT_XIN, BCS2_LFXT_XOUT
+	UCS: LFXT PORT, XIN/XOUT pins, HFXT PORT, XIN/XOUT pins
+		UCS_LFXT_PORT (=PxIN), UCS_LFXT_XIN, UCS_LFXT_XOUT, UCS_HFXT_PORT (=PxIN), UCS_HFXT_XIN, UCS_HFXT_XOUT
+	CS: LFXT PORT, XIN/XOUT pins, HFXT PORT, XIN/XOUT pins
+		CS_LFXT_PORT (=PxIN), CS_LFXT_XIN, CS_LFXT_XOUT, CS_HFXT_PORT (=PxIN), CS_HFXT_XIN, CS_HFXT_XOUT
+
+	All: SMCLK output PORT, PIN
+		CLKOUT_SMCLK_PORT (=PxIN), CLKOUT_SMCLK_PIN
+	ACLK output PORT, PIN
+		CLKOUT_ACLK_PORT (=PxIN), CLKOUT_ACLK_PIN
+
+	VLOCLK nominal frequency defined as "CPUFREQ_CHIP_SPECIFIC_VLO_NOMINAL_FREQUENCY"
+
+USCI Information-
+	USCI_A0, A1, A2, A3 - PORT, RXD/TXD pins, SPI SCLK pin
+	USCI_B0, B1, B2, B3 - PORT, RXD/TXD pins, SPI SCLK pin
+
+Peripheral Information-
+	Valid periph_mask combination for the device including all timer & comms. peripherals, defined as
+	"CPUFREQ_CHIP_SPECIFIC_PERIPH_MASK"
+	Valid count of # of clockable peripherals available, defined as "CPUFREQ_CHIP_SPECIFIC_PERIPH_COUNT"
+
