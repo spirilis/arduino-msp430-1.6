@@ -55,7 +55,7 @@ const gpio_port_definition_t chip_ports[] = {
 	{&P8IN, &P8OUT, &P8DIR, &P8REN, &P8SEL0, &P8SEL1, NULL, NULL, NULL},
 	{&P9IN, &P9OUT, &P9DIR, &P9REN, &P9SEL0, &P9SEL1, NULL, NULL, NULL},
 	{&P10IN, &P10OUT, &P10DIR, &P10REN, &P10SEL0, &P10SEL1, NULL, NULL, NULL},
-	{NULL,  NULL,   NULL,   NULL,   NULL,   NULL, NULL, NULL, NULL},  // P11 doesn't exist on FR5969
+	{NULL,  NULL,   NULL,   NULL,   NULL,   NULL, NULL, NULL, NULL},  // P11 doesn't exist on FR6989
 	{&PJIN, &PJOUT, &PJDIR, &PJREN, &PJSEL0, &PJSEL1, NULL, NULL, NULL}
 };
 #else
